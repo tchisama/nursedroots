@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import { Menu, Star, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -12,6 +12,10 @@ import {
 } from "@/components/ui/accordion";
 import Hero from "@/public/Hero.png";
 import logo from "@/public/logo.svg";
+import img1 from "@/public/1.jpg";
+import img2 from "@/public/2.jpg";
+import img3 from "@/public/3.jpg";
+import me from "@/public/me.png";
 
 export default function BeautySalon() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -145,20 +149,35 @@ export default function BeautySalon() {
           />
         </div>
       </section>
-      <main className="container max-w-md mx-auto px-4 py-8 space-y-24">
+
+      <main className=" mx-auto px-4 pt-8 space-y-24">
+        <section className="space-y-2 flex-col flex justify-center items-center">
+          <h2 className="text-xl font-semibold text-gray-800 text-center">
+            Welcome to Nourished Roots
+          </h2>
+          <p className="text-sm text-gray-600 text-center">
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+          </p>
+          <div className="flex gap-2">
+            {new Array(5).fill(0).map((_, i) => (
+              <Star key={i} className="w-5 h-5 text-primary" />
+            ))}
+          </div>
+        </section>
         {/* Services */}
-        <section className="space-y-8">
+
+        <section className="space-y-8 px-4">
           <h2 className="text-2xl font-semibold text-gray-800 text-center">
             Our Services
           </h2>
           {[1, 2, 3].map((service) => (
             <div key={service} className="space-y-4">
               <Image
-                src="/placeholder.svg"
+                src={service === 1 ? img1 : service === 2 ? img2 : img3}
                 alt="Service Image"
                 width={400}
-                height={300}
-                className="w-full h-64 object-cover rounded-lg"
+                height={400}
+                className="w-full rounded-xl aspect-[5/4] object-cover "
               />
               <div className="space-y-2">
                 <p className="text-sm text-gray-600">
@@ -168,13 +187,11 @@ export default function BeautySalon() {
                   printer took a galley of type and scrambled it to make a type
                   specimen book.
                 </p>
-                <div className="flex items-center justify-between">
-                  <span className="text-xl font-semibold text-gray-800">
+                <div className="flex items-end justify-between">
+                  <span className="text-2xl font-semibold text-gray-800">
                     $450
                   </span>
-                  <Button variant="outline" className="rounded-full">
-                    Book Now
-                  </Button>
+                  <Button className="px-6">Book Now</Button>
                 </div>
               </div>
             </div>
@@ -182,15 +199,17 @@ export default function BeautySalon() {
         </section>
 
         {/* Reviews Carousel */}
-        <section className="space-y-6">
+        <section className="space-y-6 px-4">
           <h2 className="text-2xl font-semibold text-gray-800 text-center">
             Our Clients Reviews
           </h2>
-          <div className="space-y-4">
-            <p className="text-sm text-gray-600">
-              {reviews[currentReview].text}
-            </p>
-            <p className="font-medium">{reviews[currentReview].name}</p>
+          <div className="space-y-4 ">
+            <div className="space-y-2 bg-white rounded-2xl border drop-shadow p-4">
+              <p className="font-medium">{reviews[currentReview].name}</p>
+              <p className="text-sm text-gray-600">
+                {reviews[currentReview].text}
+              </p>
+            </div>
             <div className="flex justify-between items-center">
               <Button variant="ghost" onClick={prevReview}>
                 &larr; Previous
@@ -213,16 +232,16 @@ export default function BeautySalon() {
         </section>
 
         {/* About */}
-        <section className="space-y-6">
+        <section className="space-y-6 px-4">
           <h2 className="text-2xl font-semibold text-gray-800 text-center">
             About me
           </h2>
           <Image
-            src="/placeholder.svg"
+            src={me}
             alt="About Image"
             width={400}
             height={400}
-            className="w-full h-64 object-cover rounded-lg"
+            className="w-full aspect-square object-cover rounded-xl"
           />
           <p className="text-sm text-gray-600">
             Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -230,7 +249,7 @@ export default function BeautySalon() {
             ever since the 1500s, when an unknown printer took a galley of type
             and scrambled it to make a type specimen book.
           </p>
-          <Button variant="link" className="text-blue-500 p-0">
+          <Button variant="outline" className="">
             Read More
           </Button>
         </section>
